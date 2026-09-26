@@ -11,15 +11,18 @@ services:
     ports:
       - "5432:5432"
 
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d banking_db"]
       interval: 5s
       timeout: 5s
       retries: 10
 
-  banking-app:
+  account-service:
     build: .
-    container_name: banking-app
+    container_name: account-service
 
     depends_on:
       core-db:
@@ -32,3 +35,6 @@ services:
 
     ports:
       - "8080:8080"
+
+volumes:
+  postgres_data:

@@ -1,4 +1,3 @@
-# Build Stage
 FROM gradle:8.10-jdk17 AS build
 
 WORKDIR /app
@@ -7,7 +6,6 @@ COPY . .
 
 RUN gradle clean bootJar --no-daemon
 
-# Runtime Stage
 FROM eclipse-temurin:17-jdk
 
 WORKDIR /app
